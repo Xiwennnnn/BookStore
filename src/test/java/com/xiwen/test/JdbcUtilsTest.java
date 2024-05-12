@@ -30,7 +30,7 @@ public class JdbcUtilsTest {
 
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String id = resultSet.getString("id");
+                Integer id = resultSet.getInt("id");
                 String name = resultSet.getString("username");
                 String password = resultSet.getString("password");
                 String email = resultSet.getString("email");

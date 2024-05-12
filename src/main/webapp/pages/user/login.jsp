@@ -44,7 +44,7 @@
                                name="password"/>
                         <br/>
                         <br/>
-                        <input type="submit" value="登录" id="sub_btn"/>
+                        <input type="submit" value="登录" id="sub_btn_login"/>
                     </form>
                 </div>
 

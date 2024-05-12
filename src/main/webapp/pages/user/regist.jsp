@@ -108,7 +108,7 @@
                         <img alt="" src="static/img/code.bmp" style="float: right; margin-right: 40px">
                         <br/>
                         <br/>
-                        <input type="submit" value="注册" id="sub_btn"/>
+                        <input type="submit" value="注册" id="sub_btn_register"/>
                         <a class="rt_login" href="pages/user/login.jsp">返回登录</a>
                     </form>
 

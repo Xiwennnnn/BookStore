@@ -2,16 +2,16 @@ package com.xiwen.pojo;
 
 public class User {
 
-    private String id;
+    private Integer id;
     private String username;
     private String password;
     private String email;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -52,7 +52,7 @@ public class User {
     public User() {
     }
 
-    public User(String id, String username, String password, String email) {
+    public User(Integer id, String username, String password, String email) {
         this.id = id;
         this.username = username;
         this.password = password;

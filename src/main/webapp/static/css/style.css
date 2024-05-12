@@ -188,7 +188,15 @@ h1 {
     border: 1px #e3e3e3 solid;
 }
 
-#sub_btn{
+#sub_btn_login{
+	background-color: #39987c;
+	border: none;
+	color: #fff;
+	width: 360px;
+	height: 40px;
+}
+
+#sub_btn_register{
 	background-color: #39987c;
 	border: none;
 	color: #fff;
