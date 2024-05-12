@@ -93,6 +93,8 @@ div{
 
 .logo_img{
 	float: left;
+	width: 80px;
+	height: 80px;
 }
 
 #header div a {
@@ -190,8 +192,16 @@ h1 {
 	background-color: #39987c;
 	border: none;
 	color: #fff;
-	width: 360px;
+	width: 270px;
 	height: 40px;
+}
+
+.rt_login{
+	color: #39987c;
+	padding: 10px 0;
+	width: 60px;
+	height: 20px;
+	text-align: center;
 }
 
 #l_content {
