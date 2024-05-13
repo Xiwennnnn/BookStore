@@ -19,7 +19,9 @@ public class BookServlet extends BaseServlet {
     private BookService bookService = new BookServiceImpl();
 
     protected void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("book_name = " + req.getParameter("name"));
         Book book = WebUtils.copyParamToBean(req.getParameterMap(), new Book());
+        System.out.println(book);
         bookService.addBook(book);
         resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=list");
     }
@@ -31,12 +33,24 @@ public class BookServlet extends BaseServlet {
     }
 
     protected void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        int id = WebUtils.parseInt(req.getParameter("id"), 10);
+        Book book = WebUtils.copyParamToBean(req.getParameterMap(), new Book());
+        System.out.println(book);
+        bookService.updateBook(book);
+        resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=list");
     }
 
     protected void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Book> books = bookService.queryBooks();
         req.setAttribute("books", books);
         req.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(req, resp);
+    }
+
+    protected void getBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = WebUtils.parseInt(req.getParameter("id"), 10);
+        Book book = bookService.queryBookById(id);
+        req.setAttribute("book", book);
+        req.setAttribute("action", "update");
+        req.getRequestDispatcher("/pages/manager/book_edit.jsp").forward(req, resp);
     }
 }
