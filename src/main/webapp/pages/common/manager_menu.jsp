@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div>
-    <a href="${pageContext.request.contextPath}/pages/manager/book_manager.jsp">图书管理</a>
+    <a href="manager/bookServlet?action=list">图书管理</a>
     <a href="${pageContext.request.contextPath}/pages/manager/order_manager.jsp">订单管理</a>
     <a href="${pageContext.request.contextPath}/index.jsp">返回商城</a>
 </div>

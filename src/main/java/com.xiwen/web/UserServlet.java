@@ -3,16 +3,11 @@ package com.xiwen.web;
 import com.xiwen.pojo.User;
 import com.xiwen.service.UserService;
 import com.xiwen.service.impl.UserServiceImpl;
-import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 @WebServlet(name = "UserServlet", urlPatterns = "/userServlet")
 public class UserServlet extends BaseServlet {
@@ -30,12 +25,20 @@ public class UserServlet extends BaseServlet {
         //        1.获取请求参数
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        req.setAttribute("xiwen", "ok");
+
         if(userService.login(new User(null, username, password, null)) != null){
+            Cookie cookie1 = new Cookie("username", username);
+            Cookie cookie2 = new Cookie("password", password);
+            resp.addCookie(cookie1);
+            resp.addCookie(cookie2);
+            HttpSession session = req.getSession();
+            session.setAttribute("username", username);
             req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req, resp);
         }else{
-
             req.setAttribute("msg", (String)"用户名或密码错误");
             req.setAttribute("username", username);
+            req.setAttribute("password", password);
             req.getRequestDispatcher("/pages/user/login.jsp").forward(req, resp);
         }
     }
