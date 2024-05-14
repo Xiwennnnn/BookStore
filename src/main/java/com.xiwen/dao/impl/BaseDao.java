@@ -77,7 +77,7 @@ public abstract class BaseDao {
      * @param args  sql对应的参数值
      * @return
      */
-    public Object queryForSingle(String sql, Object... args){
+    public Object queryForSingleValue(String sql, Object... args){
         Connection conn = JdbcUtils.getConnection();
 
         try {

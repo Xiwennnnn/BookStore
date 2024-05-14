@@ -24,10 +24,10 @@ public class WebUtils {
 
     public static int parseInt(String value, int defaultValue) {
         try {
-            return Integer.parseInt(value, defaultValue);
+            return Integer.parseInt(value);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return 0;
+        return defaultValue;
     }
 }

@@ -6,6 +6,7 @@ import com.xiwen.pojo.Book;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -41,6 +42,19 @@ public class BookDaoImplTest {
     @Test
     public void queryBooks() {
         for(Book book : bookDao.queryBooks()) {
+            System.out.println(book);
+        }
+    }
+
+    @Test
+    public void queryCount(){
+        System.out.println(bookDao.queryTotleCount());
+    }
+
+    @Test
+    public void queryBooksByPage(){
+        List<Book> books = bookDao.queryBooksByPage(0, 10);
+        for(Book book : books){
             System.out.println(book);
         }
     }

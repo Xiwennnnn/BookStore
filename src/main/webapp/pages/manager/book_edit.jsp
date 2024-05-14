@@ -28,7 +28,8 @@
 </div>
 <div id="main">
     <form action="manager/bookServlet" method="post">
-        <input name="action" value="<%=request.getAttribute("action")==null?"add":request.getAttribute("action")%>" type="hidden"/>
+        <input name="action" value="${param.method}" type="hidden"/>
+        <input name="id" value="${requestScope.book.id}" type="hidden"/>
         <table>
             <tr>
                 <td>名称</td>
@@ -39,11 +40,11 @@
                 <td colspan="2">操作</td>
             </tr>
             <tr>
-                <td><input name="name" type="text" value="${book.name}"/></td>
-                <td><input name="price" type="text" value="${book.price}"/></td>
-                <td><input name="author" type="text" value="${book.author}"/></td>
-                <td><input name="sales" type="text" value="${book.sales}"/></td>
-                <td><input name="stock" type="text" value="${book.stock}"/></td>
+                <td><input name="name" type="text" value="${requestScope.book.name}"/></td>
+                <td><input name="price" type="text" value="${requestScope.book.price}"/></td>
+                <td><input name="author" type="text" value="${requestScope.book.author}"/></td>
+                <td><input name="sales" type="text" value="${requestScope.book.sales}"/></td>
+                <td><input name="stock" type="text" value="${requestScope.book.stock}"/></td>
                 <td><input type="submit" value="提交"/></td>
             </tr>
         </table>

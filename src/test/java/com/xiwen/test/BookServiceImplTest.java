@@ -30,6 +30,7 @@ public class BookServiceImplTest {
 
     @Test
     public void queryBookById() {
+        System.out.println(bookService.queryBookById(30));
     }
 
     @Test

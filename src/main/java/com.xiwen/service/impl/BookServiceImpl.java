@@ -3,6 +3,7 @@ package com.xiwen.service.impl;
 import com.xiwen.dao.BookDao;
 import com.xiwen.dao.impl.BookDaoImpl;
 import com.xiwen.pojo.Book;
+import com.xiwen.pojo.Page;
 import com.xiwen.service.BookService;
 
 import java.util.List;
@@ -33,5 +34,17 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> queryBooks() {
         return bookDao.queryBooks();
+    }
+
+    @Override
+    public Page<Book> page(int pageNo, int pageSize) {
+        Page<Book> page = new Page();
+        List<Book> books = bookDao.queryBooksByPage(pageNo, pageSize);
+        int totleCount = bookDao.queryTotleCount();
+        page.setTotalCount(totleCount);
+        page.setList(books);
+        page.setPageNo(pageNo);
+        page.setPageSize(pageSize);
+        return page;
     }
 }

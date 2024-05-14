@@ -1,6 +1,7 @@
 package com.xiwen.dao;
 
 import com.xiwen.pojo.Book;
+import com.xiwen.pojo.Page;
 
 import java.util.List;
 
@@ -38,4 +39,8 @@ public interface BookDao {
      * @return 返回一个List
      */
     public List<Book> queryBooks();
+
+    public List<Book> queryBooksByPage(Integer pageNo, Integer pageSize);
+
+    public int queryTotleCount();
 }

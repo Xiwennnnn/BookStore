@@ -1,6 +1,7 @@
 package com.xiwen.service;
 
 import com.xiwen.pojo.Book;
+import com.xiwen.pojo.Page;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface BookService {
     public Book queryBookById(Integer id);
 
     public List<Book> queryBooks();
+
+    public Page<Book> page(int pageNo, int pageSize);
 }
