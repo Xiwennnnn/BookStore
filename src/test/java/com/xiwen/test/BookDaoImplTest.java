@@ -48,7 +48,7 @@ public class BookDaoImplTest {
 
     @Test
     public void queryCount(){
-        System.out.println(bookDao.queryTotleCount());
+        System.out.println(bookDao.queryTotalCount());
     }
 
     @Test

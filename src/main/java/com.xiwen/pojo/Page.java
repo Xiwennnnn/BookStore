@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Page<T> {
 
-    public static final Integer PAGE_SIZE = 4;
+    public static final Integer PAGE_SIZE = 7;
 
     private Integer pageNo;
     private Integer pageSize = PAGE_SIZE;
@@ -12,16 +12,21 @@ public class Page<T> {
     private Integer totalPage;
 
     private List<T> list;
+    /**
+     *分页条的请求地址
+     */
+    private String url;
 
     public Page() {
     }
 
-    public Page(Integer pageNo, Integer pageSize, Integer totalCount, Integer totalPage, List<T> list) {
+    public Page(Integer pageNo, Integer pageSize, Integer totalCount, Integer totalPage, List<T> list, String url) {
         this.pageNo = pageNo;
         this.pageSize = pageSize;
         this.totalCount = totalCount;
         this.totalPage = totalPage;
         this.list = list;
+        this.url = url;
     }
 
     public List<T> getList() {
@@ -64,6 +69,14 @@ public class Page<T> {
         this.totalPage = totalPage;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public String toString() {
         return "Page{" +
@@ -72,6 +85,7 @@ public class Page<T> {
                 ", totalCount=" + totalCount +
                 ", totalPage=" + totalPage +
                 ", list=" + list +
+                ", url='" + url + '\'' +
                 '}';
     }
 }

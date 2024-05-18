@@ -1,10 +1,15 @@
 package com.xiwen.web;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Method;
 
 public class BaseServlet extends HttpServlet {
@@ -17,6 +22,7 @@ public class BaseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
         String action = req.getParameter("action");
+        System.out.println(action);
         try {
             Method method = this.getClass().getDeclaredMethod
                     (action, HttpServletRequest.class, HttpServletResponse.class);

@@ -39,12 +39,39 @@ public class BookServiceImpl implements BookService {
     @Override
     public Page<Book> page(int pageNo, int pageSize) {
         Page<Book> page = new Page();
-        List<Book> books = bookDao.queryBooksByPage(pageNo, pageSize);
-        int totleCount = bookDao.queryTotleCount();
-        page.setTotalCount(totleCount);
+        int totalCount = bookDao.queryTotalCount();
+        page.setTotalCount(totalCount);
+        int totalPage = (int) Math.ceil((double) totalCount / pageSize);
+        page.setTotalPage(totalPage);
+        if(pageNo < 1){
+            pageNo = 1;
+        }
+        if(pageNo > totalPage){
+            pageNo = totalPage;
+        }
+        int startNo = (pageNo - 1) * pageSize;
+        List<Book> books = bookDao.queryBooksByPage(startNo, pageSize);
+
         page.setList(books);
         page.setPageNo(pageNo);
         page.setPageSize(pageSize);
         return page;
     }
+
+    @Override
+    public Page<Book> getPageByPrice(int pageNo, int pageSize, int startPrice, int endPrice) {
+        Page<Book> page = new Page();
+        int totalCount = bookDao.queryCountByPrice(startPrice, endPrice);
+        page.setTotalCount(totalCount);
+        int totalPage = (int) Math.ceil((double) totalCount / 4);
+        int startNo = (pageNo - 1) * pageSize;
+        List<Book> books = bookDao.queryBooksByPrice(startNo, pageSize, startPrice, endPrice);
+        page.setList(books);
+        page.setTotalPage(totalPage);
+        page.setPageNo(pageNo);
+        page.setPageSize(pageSize);
+        return page;
+    }
+
+
 }

@@ -24,7 +24,20 @@ public class WebUtils {
 
     public static int parseInt(String value, int defaultValue) {
         try {
-            return Integer.parseInt(value);
+            if(value != null && !"".equals(value)) {
+                return Integer.parseInt(value);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return defaultValue;
+    }
+
+    public static Double parseFloat(String value, Double defaultValue) {
+        try {
+            if(value != null && !"".equals(value)) {
+                return Double.parseDouble(value);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

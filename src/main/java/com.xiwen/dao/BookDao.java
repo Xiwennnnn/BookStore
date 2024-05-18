@@ -40,7 +40,11 @@ public interface BookDao {
      */
     public List<Book> queryBooks();
 
-    public List<Book> queryBooksByPage(Integer pageNo, Integer pageSize);
+    public List<Book> queryBooksByPage(Integer startNo, Integer pageSize);
 
-    public int queryTotleCount();
+    public Integer queryTotalCount();
+
+    public List<Book> queryBooksByPrice(Integer startNo, Integer pageSize,  Integer beginPrice, Integer endPrice);
+
+    public Integer queryCountByPrice(Integer beginPrice, Integer endPrice);
 }
