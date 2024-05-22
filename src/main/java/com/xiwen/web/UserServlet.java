@@ -3,11 +3,14 @@ package com.xiwen.web;
 import com.xiwen.pojo.User;
 import com.xiwen.service.UserService;
 import com.xiwen.service.impl.UserServiceImpl;
+import com.xiwen.utils.WebUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+
+import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 
 @WebServlet(name = "UserServlet", urlPatterns = "/userServlet")
 public class UserServlet extends BaseServlet {
@@ -25,7 +28,6 @@ public class UserServlet extends BaseServlet {
         //        1.获取请求参数
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        req.setAttribute("xiwen", "ok");
 
         if(userService.login(new User(null, username, password, null)) != null){
             Cookie cookie1 = new Cookie("username", username);
@@ -33,6 +35,7 @@ public class UserServlet extends BaseServlet {
             resp.addCookie(cookie1);
             resp.addCookie(cookie2);
             HttpSession session = req.getSession();
+
             session.setAttribute("username", username);
             req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req, resp);
         }else{
@@ -53,10 +56,14 @@ public class UserServlet extends BaseServlet {
     protected void regist(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String code = req.getParameter("code");
 
-        User user = (User)WebUtils.copyParamToBean(req.getParameterMap(), new User());
+        User user = (User) WebUtils.copyParamToBean(req.getParameterMap(), new User());
+        //获取session中的验证码
+        String token = (String)req.getSession().getAttribute(KAPTCHA_SESSION_KEY);
+        //删除session中的验证码
+        req.getSession().removeAttribute(KAPTCHA_SESSION_KEY);
 
-//        2. 检查 要求验证码为：abcde
-        if("abcde".equalsIgnoreCase(code)){
+//        2. 检查 要求验证码和kaptcha生成的相同
+        if(token != null && token.equalsIgnoreCase(code)){
 //            3. 检查 用户名是否可用
             if(!userService.exit(user.getUsername())){
                 userService.register(user);
@@ -75,12 +82,23 @@ public class UserServlet extends BaseServlet {
         }else{
 //            不正确
 //            跳回注册页面
-            req.setAttribute("msg", "验证码错误！");
+            if(token == null){
+                req.setAttribute("msg", "请不要重复提交表单!");
+            }
+            else{
+                req.setAttribute("msg", "验证码错误！");
+            }
             req.setAttribute("username", user.getUsername());
             req.setAttribute("password", user.getPassword());
             req.setAttribute("repwd", user.getPassword());
             req.setAttribute("email", user.getEmail());
             req.getRequestDispatcher("/pages/user/regist.jsp").forward(req, resp);
         }
+    }
+
+    protected void logout (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        session.removeAttribute("username");
+        resp.sendRedirect(req.getContextPath() + "/index.jsp");
     }
 }

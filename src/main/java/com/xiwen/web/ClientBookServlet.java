@@ -4,9 +4,11 @@ import com.xiwen.pojo.Book;
 import com.xiwen.pojo.Page;
 import com.xiwen.service.BookService;
 import com.xiwen.service.impl.BookServiceImpl;
+import com.xiwen.utils.WebUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -16,6 +18,9 @@ public class ClientBookServlet extends BaseServlet {
     private BookService bookService = new BookServiceImpl();
 
     protected void getPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Cookie cookie = new Cookie("JSESSIONID", req.getRequestedSessionId());
+        cookie.setMaxAge(60 * 60 * 24 * 7);
+        resp.addCookie(cookie);
         int pageNo =  WebUtils.parseInt(req.getParameter("pageNo"), 1);
         int pageSize =  WebUtils.parseInt(req.getParameter("pageSize"), 4);
         Page<Book> page = bookService.page(pageNo, pageSize);

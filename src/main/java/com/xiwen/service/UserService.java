@@ -24,4 +24,6 @@ public interface UserService {
      */
     public boolean exit(String user);
 
+    public User getUser(String user);
+
 }

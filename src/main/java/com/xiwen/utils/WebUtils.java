@@ -1,5 +1,7 @@
-package com.xiwen.web;
+package com.xiwen.utils;
 
+import com.xiwen.pojo.Book;
+import com.xiwen.pojo.CartItem;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.util.Map;
@@ -42,5 +44,15 @@ public class WebUtils {
             e.printStackTrace();
         }
         return defaultValue;
+    }
+
+    public static CartItem parseCartItem(Book book) {
+        CartItem cartItem = new CartItem();
+        cartItem.setId(book.getId());
+        cartItem.setPrice(book.getPrice());
+        cartItem.setCount(1);
+        cartItem.setName(book.getName());
+        cartItem.setTotalprice(book.getPrice());
+        return cartItem;
     }
 }

@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%
     String scheme = request.getScheme();//获取协议
     String serverName = request.getServerName();//获取服务器ip
